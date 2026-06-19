@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Krishna Priya Traders — Railway Signalling & Telecom Contractors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F5F0;
+      --white:    #FFFFFF;
+      --ink:      #1C2329;
+      --ink2:     #3A444D;
+      --muted:    #6B7880;
+      --rule:     #D8D2C8;
+      --gold:     #B8892A;
+      --gold-lt:  #D4A84B;
+      --gold-bg:  #FBF6EE;
+      --navy:     #1B2E45;
+      --navy2:    #243A55;
+      --accent:   #C0392B;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy);
+      padding: 0.55rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: rgba(255,255,255,0.65);
+    }
+    .topbar a { color: rgba(255,255,255,0.65); text-decoration: none; }
+    .topbar a:hover { color: #fff; }
+    .topbar-left, .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+    .topbar-divider { color: rgba(255,255,255,0.25); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 72px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .nav-logo img {
+      height: 44px; width: auto; object-fit: contain;
+    }
+    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .nav-logo-name {
+      font-family: 'Merriweather', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--navy); letter-spacing: 0.01em; line-height: 1.1;
+    }
+    .nav-logo-sub {
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+    }
+    .nav-links { display: flex; gap: 0; list-style: none; height: 72px; }
+    .nav-links li { display: flex; align-items: center; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; color: var(--ink2);
+      text-decoration: none; padding: 0 1.2rem; height: 100%;
+      display: flex; align-items: center;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-links a:hover { color: var(--navy); border-bottom-color: var(--gold); }
+    .nav-cta {
+      background: var(--navy); color: #fff;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 0.6rem 1.5rem; text-decoration: none;
+      border: 2px solid var(--navy); letter-spacing: 0.04em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: transparent; color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 80px 5vw 70px;
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 4rem; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.025) 0px,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px,
+          transparent 60px
+        );
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(184,137,42,0.15);
+      border: 1px solid rgba(184,137,42,0.4);
+      padding: 0.35rem 0.9rem; margin-bottom: 1.8rem;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-lt); font-weight: 600;
+    }
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1.25;
+      color: #fff; margin-bottom: 1.4rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .hero-sub {
+      font-size: 1.05rem; line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px; margin-bottom: 2.5rem; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold); color: #fff;
+      padding: 0.85rem 2rem; font-size: 0.82rem;
+      font-weight: 600; letter-spacing: 0.06em;
+      text-decoration: none; transition: background 0.2s;
+      border: 2px solid var(--gold);
+    }
+    .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+    .btn-outline-w {
+      border: 2px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);
+      padding: 0.85rem 2rem; font-size: 0.82rem;
+      font-weight: 500; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-outline-w:hover { border-color: #fff; color: #fff; }
+
+    /* Hero stats card */
+    .hero-stats {
+      background: var(--white);
+      border-top: 4px solid var(--gold);
+      padding: 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      position: relative; z-index: 1;
+    }
+    .hstat {
+      padding: 1.2rem 1rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .hstat:nth-child(2), .hstat:nth-child(4) { border-right: none; }
+    .hstat:nth-child(3), .hstat:nth-child(4) { border-bottom: none; }
+    .hstat-num {
+      font-family: 'Merriweather', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--navy); line-height: 1;
+    }
+    .hstat-num sup { font-size: 1rem; vertical-align: super; }
+    .hstat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; font-weight: 400; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--gold);
+      padding: 1.1rem 5vw;
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.8rem; font-weight: 600; color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .trust-item::before {
+      content: '✓';
+      width: 20px; height: 20px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 6rem 5vw;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+      background: var(--white);
+    }
+    .about-left {}
+    .section-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-eyebrow::after { content:''; flex:1; height:1px; background:var(--rule); }
+    h2.section-title {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700;
+      line-height: 1.3; color: var(--navy); margin-bottom: 1.4rem;
+    }
+    .body-text {
+      font-size: 0.97rem; line-height: 1.85;
+      color: var(--ink2); font-weight: 300; margin-bottom: 1.2rem;
+    }
+    .about-pillars {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--rule); margin-top: 2rem;
+    }
+    .pillar {
+      background: var(--gold-bg);
+      padding: 1.3rem 1.2rem;
+    }
+    .pillar-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .pillar-title {
+      font-family: 'Merriweather', serif;
+      font-size: 0.9rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .pillar-text { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+    /* Team section on right */
+    .about-right {}
+    .team-header {
+      font-family: 'Merriweather', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--navy);
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--rule);
+      margin-bottom: 2rem;
+    }
+    .team-card {
+      margin-bottom: 2rem;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .team-card-top {
+      display: flex; gap: 0; align-items: stretch;
+    }
+    .team-photo {
+      width: 130px; flex-shrink: 0;
+      object-fit: cover; object-position: top;
+      display: block;
+    }
+    .team-info {
+      padding: 1.3rem 1.3rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .team-name {
+      font-family: 'Merriweather', serif;
+      font-size: 1rem; font-weight: 700; color: var(--navy);
+    }
+    .team-role {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin: 0.3rem 0 0.7rem;
+    }
+    .team-quote {
+      font-size: 0.83rem; color: var(--ink2); line-height: 1.7; font-style: italic;
+      border-top: 1px solid var(--rule); padding-top: 1rem; margin: 1rem 1.3rem 1.3rem;
+    }
+    .team-quote::before { content: '" '; color: var(--gold); font-size: 1.2rem; }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 6rem 5vw;
+      background: var(--bg);
+    }
+    .services-header { margin-bottom: 3rem; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      padding: 2rem 1.8rem;
+      border-top: 3px solid var(--rule);
+      transition: border-top-color 0.25s, box-shadow 0.25s;
+    }
+    .service-card:hover {
+      border-top-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    .svc-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+      display: block;
+    }
+    .svc-title {
+      font-family: 'Merriweather', serif;
+      font-size: 1rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 0.7rem; line-height: 1.3;
+    }
+    .svc-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── GALLERY ── */
+    .gallery {
+      padding: 5rem 5vw;
+      background: var(--navy);
+    }
+    .gallery-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-lt); font-weight: 600; margin-bottom: 0.8rem;
+    }
+    .gallery h2 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700;
+      color: #fff; margin-bottom: 2.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .gallery-img {
+      width: 100%; aspect-ratio: 1;
+      object-fit: cover; display: block;
+      filter: brightness(0.92);
+      transition: filter 0.3s;
+    }
+    .gallery-img:hover { filter: brightness(1); }
+
+    /* ── CLIENTS ── */
+    .clients {
+      background: var(--white);
+      padding: 5rem 5vw;
+    }
+    .clients-header { margin-bottom: 3rem; }
+    .clients-logos {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--rule);
+    }
+    .client-logo-cell {
+      background: var(--white);
+      padding: 2rem 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .client-logo-cell:hover { background: var(--gold-bg); }
+    .client-logo-cell img {
+      max-height: 48px; max-width: 130px;
+      object-fit: contain; filter: grayscale(100%) opacity(0.6);
+      transition: filter 0.3s;
+    }
+    .client-logo-cell:hover img { filter: grayscale(0%) opacity(1); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--gold);
+      padding: 4rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .cta-banner-text h3 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700;
+      color: #fff; margin-bottom: 0.5rem;
+    }
+    .cta-banner-text p { font-size: 0.95rem; color: rgba(255,255,255,0.85); font-weight: 300; }
+    .btn-white {
+      background: #fff; color: var(--gold);
+      padding: 0.9rem 2.2rem; font-size: 0.82rem;
+      font-weight: 700; text-decoration: none; letter-spacing: 0.06em;
+      border: 2px solid #fff; white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-white:hover { background: transparent; color: #fff; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--bg);
+      padding: 6rem 5vw;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 2rem; }
+    .cinfo-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .cinfo-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-top: 2px;
+    }
+    .cinfo-label {
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); font-weight: 700; margin-bottom: 0.3rem;
+    }
+    .cinfo-val { font-size: 0.9rem; color: var(--ink2); line-height: 1.6; }
+    .cinfo-val a { color: var(--ink2); text-decoration: none; }
+    .cinfo-val a:hover { color: var(--navy); text-decoration: underline; }
+
+    .contact-form {}
+    .form-group { margin-bottom: 1.1rem; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group label {
+      display: block; font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--white); border: 1px solid var(--rule);
+      color: var(--ink); font-family: inherit; font-size: 0.9rem;
+      padding: 0.75rem 1rem; outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit-btn {
+      background: var(--navy); color: #fff;
+      border: 2px solid var(--navy);
+      padding: 0.9rem 2.5rem; font-family: inherit;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit-btn:hover { background: transparent; color: var(--navy); }
+
+    /* ── FOOTER ── */
+    .footer-main {
+      background: var(--navy);
+      padding: 3.5rem 5vw 2rem;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      gap: 3rem;
+    }
+    .footer-brand img { height: 40px; margin-bottom: 1rem; filter: brightness(10); }
+    .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 300; margin-top: 0.8rem; }
+    .footer-col-title {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-lt); font-weight: 600; margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a {
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-contact-item { font-size: 0.83rem; color: rgba(255,255,255,0.5); margin-bottom: 0.7rem; line-height: 1.6; }
+    .footer-contact-item a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .footer-contact-item a:hover { color: #fff; }
+    .footer-bottom {
+      background: #0f1c2d;
+      padding: 1.2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.35);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { display: none; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .clients-logos { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .topbar { display: none; }
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .trust-bar { gap: 1.2rem; }
+      .about-pillars { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Railnagar, Rajkot, Gujarat – 360001</span>
+    <span class="topbar-divider">|</span>
+    <span>Mon–Sat: 9:00 AM – 6:00 PM</span>
+  </div>
+  <div class="topbar-right">
+    <a href="tel:+919898158196">📞 +91-9898 158 196</a>
+    <span class="topbar-divider">|</span>
+    <a href="mailto:info@krishnapriyatraders.com">✉ info@krishnapriyatraders.com</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/06/cropped-KPT_Logo_PNG-01-1-scaled-1-270x270.png" alt="KPT Logo"/>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">Krishna Priya Traders</div>
+      <div class="nav-logo-sub">Railway Contractors & Suppliers</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">Est. 2007 · Rajkot, Gujarat</div>
+    <h1>
+      Empowering Railways with<br>
+      <em>Smart Signalling Solutions</em>
+    </h1>
+    <p class="hero-sub">
+      Krishna Priya Traders specialises in advanced signalling and telecommunication services for safer, more efficient railway operations. With 20+ years of experience, we deliver precision and reliability — from design to commissioning.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-gold">Explore Services</a>
+      <a href="#contact" class="btn-outline-w">Get a Quote</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">20<sup>+</sup></div>
+      <div class="hstat-label">Years of Experience</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">100<sup>+</sup></div>
+      <div class="hstat-label">Field Engineers</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">8<sup>+</sup></div>
+      <div class="hstat-label">Major Clients</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">0</div>
+      <div class="hstat-label">Safety Compromises</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">Timely Delivery</div>
+  <div class="trust-item">Zero Hassle Execution</div>
+  <div class="trust-item">Safety First Approach</div>
+  <div class="trust-item">Indian Railways Approved</div>
+  <div class="trust-item">End-to-End Solutions</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left">
+    <div class="section-eyebrow">About Us</div>
+    <h2 class="section-title">Building Safer,<br>Smarter Railways Since 2007</h2>
+    <p class="body-text">
+      Founded in 2007, <strong>Krishna Priya Traders</strong> has emerged as a leading contractor in the Railway Signalling & Telecom domain. Backed by decades of hands-on experience, we bring precision, professionalism, and performance to the rail infrastructure sector.
+    </p>
+    <p class="body-text">
+      Our strength lies in our dedicated team of 25–30 permanent staff and over 100 skilled contractual employees who help us scale efficiently based on project needs. We combine modern technology with industry best practices to deliver end-to-end solutions.
+    </p>
+    <div class="about-pillars">
+      <div class="pillar">
+        <div class="pillar-icon">💡</div>
+        <div class="pillar-title">Our Mission</div>
+        <p class="pillar-text">Deliver smart, high-quality railway systems that exceed client expectations while fostering a growth-oriented work culture.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🌍</div>
+        <div class="pillar-title">Our Vision</div>
+        <p class="pillar-text">Lead in sustainable transport infrastructure through intelligent, cost-effective, and reliable solutions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <div class="team-header">Meet Our Leadership</div>
+
+    <!-- Owner 1 -->
+    <div class="team-card">
+      <div class="team-card-top">
+        <img
+          class="team-photo"
+          src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/DSC09271-Edited-1020x1020.png"
+          alt="Chandra Kishor Singh"
+        />
+        <div class="team-info">
+          <div class="team-name">Chandra Kishor Singh</div>
+          <div class="team-role">Founder & Owner</div>
+          <p class="body-text" style="font-size:0.82rem; margin:0;">I started KPT with a strong will, a clear vision, and a commitment to hard work. Growth for me is a continuous journey — building values of honesty, quality, and long-term relationships.</p>
+        </div>
+      </div>
+      <p class="team-quote">
+        As we move forward, I remain dedicated to strengthening our people, adopting smarter practices, and embracing change — with the same passion that started it all.
+      </p>
+    </div>
+
+    <!-- Owner 2 -->
+    <div class="team-card">
+      <div class="team-card-top">
+        <img
+          class="team-photo"
+          src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/PRANJAL_PATEL-1020x1020.jpg"
+          alt="Pranjal Patel"
+        />
+        <div class="team-info">
+          <div class="team-name">Pranjal Patel</div>
+          <div class="team-role">Business Executive</div>
+          <p class="body-text" style="font-size:0.82rem; margin:0;">The success of KPT comes from hard work and the strong relationships we've built with customers and vendors. Innovation drives my approach to business at every step.</p>
+        </div>
+      </div>
+      <p class="team-quote">
+        What I'm most proud of is the trust we've earned from our clients — reflecting our commitment to detail, quality, and timely delivery.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-eyebrow">What We Offer</div>
+    <h2 class="section-title">Our Services</h2>
+    <p class="body-text" style="max-width:560px;">End-to-end railway signalling and telecom solutions — designed, installed, tested, and maintained with uncompromising quality.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="svc-icon">🔀</span>
+      <div class="svc-title">EI & RRI Interlocking Works</div>
+      <p class="svc-desc">Electronic and Route Relay Interlocking systems designed, installed, and commissioned for safe, conflict-free train movements across junctions.</p>
+    </div>
+    <div class="service-card">
+      <span class="svc-icon">📡</span>
+      <div class="svc-title">Axle Counter & Telecom Solutions</div>
+      <p class="svc-desc">Reliable axle counter installations and telecom infrastructure ensuring real-time communication and precise train detection at every track section.</p>
+    </div>
+    <div class="service-card">
+      <span class="svc-icon">🔧</span>
+      <div class="svc-title">Preventive Maintenance</div>
+      <p class="svc-desc">Scheduled inspections, cleaning, lubrication, and component testing to keep signalling systems healthy and operational — preventing failures before they occur.</p>
+    </div>
+    <div class="service-card">
+      <span class="svc-icon">⚡</span>
+      <div class="svc-title">Fault Rectification & Repairs</div>
+      <p class="svc-desc">Rapid identification and resolution of wiring faults, broken components, and calibration errors — minimising downtime and restoring operations swiftly.</p>
+    </div>
+    <div class="service-card">
+      <span class="svc-icon">📐</span>
+      <div class="svc-title">Signalling System Design & Integration</div>
+      <p class="svc-desc">Complete design, integration, and testing of signalling systems aligned with Indian Railways standards, safety norms, and project specifications.</p>
+    </div>
+    <div class="service-card">
+      <span class="svc-icon">✅</span>
+      <div class="svc-title">System Commissioning</div>
+      <p class="svc-desc">End-to-end commissioning support — from site surveys and system trials to final handover with zero safety compromises and full documentation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-eyebrow">Our Work</div>
+  <h2>A Glimpse from the Field</h2>
+  <div class="gallery-grid">
+    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.56-PM-600x600.jpeg" alt="Field work 1"/>
+    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.50-PM-600x600.jpeg" alt="Field work 2"/>
+    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.57-PM-600x600.jpeg" alt="Field work 3"/>
+    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.57-PM-1-600x600.jpeg" alt="Field work 4"/>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <div class="clients-header">
+    <div class="section-eyebrow">Our Clients</div>
+    <h2 class="section-title">Trusted by India's Leading Railway Organisations</h2>
+  </div>
+  <div class="clients-logos">
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/Daco_3987834-1020x1020.png" alt="Indian Railways"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/275100RVNLlogo1.svg" alt="RVNL"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/HitachiRailSTS.svg" alt="Hitachi Rail STS"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/KEC-Logo-hi-res-jpg.jpg" alt="KEC"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/lt.webp" alt="L&T"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/L.2.1-1.png" alt="Client"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/dfc-logo.jpg" alt="DFC"/>
+    </div>
+    <div class="client-logo-cell">
+      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/download.png" alt="Client"/>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-banner-text">
+    <h3>Have a Railway Project in Mind?</h3>
+    <p>We respond to all enquiries within 24 hours. Timely delivery. Zero hassle. Guaranteed.</p>
+  </div>
+  <a href="#contact" class="btn-white">Contact Us Today</a>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="section-eyebrow">Contact Us</div>
+    <h2 class="section-title">Get in Touch<br>with Our Team</h2>
+    <p class="body-text">Fill out the form or reach us directly. We'll get back to you within 24 hours with the right solution for your project.</p>
+    <div class="contact-info">
+      <div class="cinfo-item">
+        <div class="cinfo-icon">📞</div>
+        <div>
+          <div class="cinfo-label">Phone</div>
+          <div class="cinfo-val">
+            <a href="tel:+919898158196">+91-9898 158 196</a><br>
+            <a href="tel:+917096386274">+91-7096 386 274</a>
+          </div>
+        </div>
+      </div>
+      <div class="cinfo-item">
+        <div class="cinfo-icon">✉</div>
+        <div>
+          <div class="cinfo-label">Email</div>
+          <div class="cinfo-val"><a href="mailto:info@krishnapriyatraders.com">info@krishnapriyatraders.com</a></div>
+        </div>
+      </div>
+      <div class="cinfo-item">
+        <div class="cinfo-icon">📍</div>
+        <div>
+          <div class="cinfo-label">Office Address</div>
+          <div class="cinfo-val">B/H. Jay Ambe Apartment, Popatpara,<br>Plot No.33, Lord Krishna Park, St. No.2,<br>Railnagar, Rajkot – 360001, Gujarat, India</div>
+        </div>
+      </div>
+      <div class="cinfo-item">
+        <div class="cinfo-icon">🕐</div>
+        <div>
+          <div class="cinfo-label">Working Hours</div>
+          <div class="cinfo-val">Monday – Saturday: 9:00 AM – 6:00 PM IST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <div class="section-eyebrow">Send a Message</div>
+    <br/>
+    <div class="form-row-2">
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
+      <div class="form-group"><label>Company / Organisation</label><input type="text" placeholder="Your company"/></div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+    </div>
+    <div class="form-group"><label>Subject / Project Type</label><input type="text" placeholder="e.g. EI Interlocking, Maintenance Contract…"/></div>
+    <div class="form-group"><label>Message</label><textarea placeholder="Describe your project — scope, location, timeline, and any specific requirements…"></textarea></div>
+    <button class="form-submit-btn">Send Message →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-main">
+  <div>
+    <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/06/White_Cropped.png" alt="KPT Logo"/>
+    <div style="font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:#fff;">Krishna Priya Traders</div>
+    <p class="footer-tagline">Railway Signalling & Telecom contractors delivering safe, reliable, and precision infrastructure since 2007.</p>
+  </div>
+  <div>
+    <div class="footer-col-title">Quick Links</div>
+    <ul class="footer-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#clients">Our Clients</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Our Services</div>
+    <ul class="footer-links">
+      <li><a href="#services">EI & RRI Interlocking</a></li>
+      <li><a href="#services">Axle Counter Solutions</a></li>
+      <li><a href="#services">Telecom Infrastructure</a></li>
+      <li><a href="#services">Preventive Maintenance</a></li>
+      <li><a href="#services">Fault Rectification</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Contact</div>
+    <div class="footer-contact-item">📍 Railnagar, Rajkot – 360001<br>Gujarat, India</div>
+    <div class="footer-contact-item">📞 <a href="tel:+919898158196">+91-9898 158 196</a></div>
+    <div class="footer-contact-item">✉ <a href="mailto:info@krishnapriyatraders.com">info@krishnapriyatraders.com</a></div>
+  </div>
+</div>
+<div class="footer-bottom">
+  <span>© 2026 Krishna Priya Traders. All rights reserved.</span>
+  <span>Website by AAKAR Tech</span>
+</div>
+
+</body>
+</html>
