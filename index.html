@@ -1,483 +1,631 @@
+cat > /mnt/user-data/outputs/kpt3.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Krishna Priya Traders — Railway Signalling & Telecom Contractors</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <title>Krishna Priya Traders — Railway Signalling & Telecom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #F7F5F0;
+      --yellow:   #F5C800;
+      --yellow2:  #FFD93D;
+      --concrete: #1E1E1E;
+      --dark:     #141414;
+      --steel:    #2F3336;
+      --field:    #3D4347;
+      --grey:     #5A5F62;
+      --mist:     #9AA0A6;
+      --offwhite: #ECEAE4;
       --white:    #FFFFFF;
-      --ink:      #1C2329;
-      --ink2:     #3A444D;
-      --muted:    #6B7880;
-      --rule:     #D8D2C8;
-      --gold:     #B8892A;
-      --gold-lt:  #D4A84B;
-      --gold-bg:  #FBF6EE;
-      --navy:     #1B2E45;
-      --navy2:    #243A55;
-      --accent:   #C0392B;
+      --rust:     #C0420A;
     }
 
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--concrete);
+      color: var(--offwhite);
       overflow-x: hidden;
     }
 
-    /* ── TOP BAR ── */
-    .topbar {
-      background: var(--navy);
-      padding: 0.55rem 5vw;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.78rem; color: rgba(255,255,255,0.65);
+    /* ═══ HAZARD TAPE — the signature element ═══ */
+    .hazard {
+      height: 22px; width: 100%;
+      background: repeating-linear-gradient(
+        -55deg,
+        var(--yellow) 0px,
+        var(--yellow) 18px,
+        var(--concrete) 18px,
+        var(--concrete) 36px
+      );
+      flex-shrink: 0;
     }
-    .topbar a { color: rgba(255,255,255,0.65); text-decoration: none; }
-    .topbar a:hover { color: #fff; }
-    .topbar-left, .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
-    .topbar-divider { color: rgba(255,255,255,0.25); }
+    .hazard-sm {
+      height: 10px; width: 100%;
+      background: repeating-linear-gradient(
+        -55deg,
+        var(--yellow) 0px,
+        var(--yellow) 10px,
+        rgba(0,0,0,0.6) 10px,
+        rgba(0,0,0,0.6) 20px
+      );
+    }
 
-    /* ── NAV ── */
+    /* ═══ TOP CONTACT BAR ═══ */
+    .topbar {
+      background: var(--dark);
+      padding: 0.5rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem; color: var(--mist);
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .topbar a { color: var(--mist); text-decoration: none; transition: color 0.2s; }
+    .topbar a:hover { color: var(--yellow); }
+    .topbar-left, .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+    .topbar-sep { color: #333; }
+
+    /* ═══ NAV ═══ */
     nav {
-      background: var(--white);
-      border-bottom: 1px solid var(--rule);
-      position: sticky; top: 0; z-index: 100;
+      background: var(--dark);
+      position: sticky; top: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5vw; height: 72px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      padding: 0 5vw; height: 68px;
+      border-bottom: 3px solid var(--yellow);
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 14px;
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-logo-img { height: 42px; width: auto; object-fit: contain; filter: brightness(10) saturate(0); }
+    .nav-brand-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--white); line-height: 1.1;
     }
-    .nav-logo img {
-      height: 44px; width: auto; object-fit: contain;
-    }
-    .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
-    .nav-logo-name {
-      font-family: 'Merriweather', serif;
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--navy); letter-spacing: 0.01em; line-height: 1.1;
-    }
-    .nav-logo-sub {
-      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600;
-    }
-    .nav-links { display: flex; gap: 0; list-style: none; height: 72px; }
-    .nav-links li { display: flex; align-items: center; }
+    .nav-brand-name span { color: var(--yellow); display: block; font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; margin-top: 1px; }
+    .nav-links { display: flex; list-style: none; height: 68px; }
     .nav-links a {
-      font-size: 0.82rem; font-weight: 500; color: var(--ink2);
-      text-decoration: none; padding: 0 1.2rem; height: 100%;
       display: flex; align-items: center;
-      border-bottom: 3px solid transparent;
+      height: 100%; padding: 0 1.2rem;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mist); text-decoration: none; font-weight: 500;
+      border-bottom: 3px solid transparent; margin-bottom: -3px;
       transition: color 0.2s, border-color 0.2s;
     }
-    .nav-links a:hover { color: var(--navy); border-bottom-color: var(--gold); }
-    .nav-cta {
-      background: var(--navy); color: #fff;
-      font-size: 0.78rem; font-weight: 600;
-      padding: 0.6rem 1.5rem; text-decoration: none;
-      border: 2px solid var(--navy); letter-spacing: 0.04em;
-      transition: background 0.2s, color 0.2s;
+    .nav-links a:hover { color: var(--white); border-bottom-color: var(--yellow); }
+    .nav-quote {
+      background: var(--yellow); color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.6rem 1.4rem;
+      text-decoration: none; transition: background 0.2s;
     }
-    .nav-cta:hover { background: transparent; color: var(--navy); }
+    .nav-quote:hover { background: var(--yellow2); }
 
-    /* ── HERO ── */
+    /* ═══ HERO ═══ */
     .hero {
-      background: var(--navy);
-      padding: 80px 5vw 70px;
-      display: grid; grid-template-columns: 1fr 420px;
-      gap: 4rem; align-items: center;
+      min-height: 100vh;
+      background: var(--dark);
+      display: grid; grid-template-rows: 1fr auto;
       position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
+    /* Full-bleed field photo feel using CSS */
+    .hero-bg {
       position: absolute; inset: 0;
       background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,0.025) 0px,
-          rgba(255,255,255,0.025) 1px,
-          transparent 1px,
-          transparent 60px
-        );
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(245,200,0,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(192,66,10,0.08) 0%, transparent 60%),
+        linear-gradient(160deg, #141414 40%, #1a1008 100%);
+      z-index: 0;
+    }
+    /* Animated scan line — feels like monitoring equipment */
+    .hero-scan {
+      position: absolute; inset: 0; z-index: 0; overflow: hidden;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.008) 3px,
+        rgba(255,255,255,0.008) 4px
+      );
       pointer-events: none;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(184,137,42,0.15);
-      border: 1px solid rgba(184,137,42,0.4);
-      padding: 0.35rem 0.9rem; margin-bottom: 1.8rem;
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold-lt); font-weight: 600;
+    .hero-main {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 400px;
+      gap: 0; align-items: center;
+      padding: 100px 5vw 60px;
     }
+    .hero-left {}
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--yellow); color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 0.35rem 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .hero-tag::before { content: '▶'; font-size: 0.5rem; }
     .hero h1 {
-      font-family: 'Merriweather', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700; line-height: 1.25;
-      color: #fff; margin-bottom: 1.4rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 700; line-height: 1;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      color: var(--white); margin-bottom: 1.6rem;
     }
-    .hero h1 em { font-style: italic; color: var(--gold-lt); }
-    .hero-sub {
-      font-size: 1.05rem; line-height: 1.8;
-      color: rgba(255,255,255,0.65);
-      max-width: 520px; margin-bottom: 2.5rem; font-weight: 300;
+    .hero h1 .line-yellow { color: var(--yellow); display: block; }
+    .hero h1 .line-outline {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent; display: block;
     }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-gold {
-      background: var(--gold); color: #fff;
-      padding: 0.85rem 2rem; font-size: 0.82rem;
-      font-weight: 600; letter-spacing: 0.06em;
+    .hero-desc {
+      font-size: 1rem; line-height: 1.8;
+      color: var(--mist); max-width: 480px;
+      font-weight: 300; margin-bottom: 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-yellow {
+      background: var(--yellow); color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.9rem 2rem;
       text-decoration: none; transition: background 0.2s;
-      border: 2px solid var(--gold);
     }
-    .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
-    .btn-outline-w {
-      border: 2px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);
-      padding: 0.85rem 2rem; font-size: 0.82rem;
-      font-weight: 500; text-decoration: none; transition: all 0.2s;
+    .btn-yellow:hover { background: var(--yellow2); }
+    .btn-ghost-y {
+      border: 2px solid var(--yellow); color: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.9rem 2rem;
+      text-decoration: none; transition: all 0.2s;
     }
-    .btn-outline-w:hover { border-color: #fff; color: #fff; }
+    .btn-ghost-y:hover { background: var(--yellow); color: var(--dark); }
 
-    /* Hero stats card */
-    .hero-stats {
-      background: var(--white);
-      border-top: 4px solid var(--gold);
+    /* Hero right — field data panel */
+    .hero-panel {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,200,0,0.25);
+      border-left: 4px solid var(--yellow);
       padding: 2rem;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
       position: relative; z-index: 1;
     }
-    .hstat {
-      padding: 1.2rem 1rem;
-      border-right: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
+    .panel-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;
     }
-    .hstat:nth-child(2), .hstat:nth-child(4) { border-right: none; }
-    .hstat:nth-child(3), .hstat:nth-child(4) { border-bottom: none; }
-    .hstat-num {
-      font-family: 'Merriweather', serif;
-      font-size: 2rem; font-weight: 700;
-      color: var(--navy); line-height: 1;
+    .panel-label::before {
+      content: ''; width: 8px; height: 8px;
+      background: var(--yellow); border-radius: 50%;
+      animation: blink 1.4s steps(1) infinite;
     }
-    .hstat-num sup { font-size: 1rem; vertical-align: super; }
-    .hstat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; font-weight: 400; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .panel-stat {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center;
+    }
+    .panel-stat:last-child { border-bottom: none; }
+    .panel-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem; font-weight: 700; color: var(--white);
+      line-height: 1; min-width: 90px;
+    }
+    .panel-num em { color: var(--yellow); font-style: normal; font-size: 1.5rem; }
+    .panel-desc { font-size: 0.8rem; color: var(--mist); line-height: 1.5; font-weight: 300; }
 
-    /* ── TRUST BAR ── */
-    .trust-bar {
-      background: var(--gold);
-      padding: 1.1rem 5vw;
-      display: flex; align-items: center; justify-content: center;
-      gap: 3rem; flex-wrap: wrap;
+    /* Hero bottom bar */
+    .hero-bottom {
+      position: relative; z-index: 1;
+      background: var(--steel);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
-    .trust-item {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-size: 0.8rem; font-weight: 600; color: #fff;
-      letter-spacing: 0.04em;
+    .hb-item {
+      padding: 1.2rem 2vw;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 0.75rem;
     }
-    .trust-item::before {
-      content: '✓';
-      width: 20px; height: 20px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem;
+    .hb-item:last-child { border-right: none; }
+    .hb-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .hb-text { font-size: 0.78rem; color: var(--mist); line-height: 1.4; }
+    .hb-text strong { color: var(--white); display: block; font-size: 0.82rem; }
+
+    /* ═══ HAZARD DIVIDER with label ═══ */
+    .section-divider {
+      position: relative;
+      height: 22px;
+    }
+    .section-divider .hazard { height: 22px; }
+    .section-divider .div-label {
+      position: absolute; right: 5vw; top: 50%;
+      transform: translateY(-50%);
+      background: var(--yellow); color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 0.15rem 0.7rem;
     }
 
-    /* ── ABOUT ── */
-    .about {
+    /* ═══ ABOUT / FIELD STORY ═══ */
+    .about-section {
+      background: var(--concrete);
       padding: 6rem 5vw;
+    }
+    .about-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 5rem; align-items: start;
-      background: var(--white);
     }
-    .about-left {}
-    .section-eyebrow {
-      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600; margin-bottom: 0.8rem;
+    .eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 1rem;
       display: flex; align-items: center; gap: 10px;
     }
-    .section-eyebrow::after { content:''; flex:1; height:1px; background:var(--rule); }
-    h2.section-title {
-      font-family: 'Merriweather', serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700;
-      line-height: 1.3; color: var(--navy); margin-bottom: 1.4rem;
+    .eyebrow::before { content:''; width:30px; height:2px; background:var(--yellow); }
+    h2.field-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.03em; line-height: 1.05;
+      color: var(--white); margin-bottom: 1.5rem;
     }
-    .body-text {
-      font-size: 0.97rem; line-height: 1.85;
-      color: var(--ink2); font-weight: 300; margin-bottom: 1.2rem;
+    h2.field-title span { color: var(--yellow); }
+    .field-body {
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--mist); font-weight: 300; margin-bottom: 1.2rem;
     }
+    .field-body strong { color: var(--offwhite); font-weight: 500; }
+
     .about-pillars {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; background: var(--rule); margin-top: 2rem;
+      margin-top: 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: rgba(255,255,255,0.06);
     }
     .pillar {
-      background: var(--gold-bg);
-      padding: 1.3rem 1.2rem;
+      background: var(--steel);
+      padding: 1.4rem 1.2rem;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s;
     }
-    .pillar-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
-    .pillar-title {
-      font-family: 'Merriweather', serif;
-      font-size: 0.9rem; font-weight: 700; color: var(--navy);
-      margin-bottom: 0.4rem;
+    .pillar:hover { border-left-color: var(--yellow); }
+    .pillar-head {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--yellow); margin-bottom: 0.5rem;
     }
-    .pillar-text { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+    .pillar-text { font-size: 0.8rem; color: var(--mist); line-height: 1.65; }
 
-    /* Team section on right */
-    .about-right {}
-    .team-header {
-      font-family: 'Merriweather', serif;
-      font-size: 1.1rem; font-weight: 700; color: var(--navy);
-      padding-bottom: 0.8rem;
-      border-bottom: 2px solid var(--rule);
-      margin-bottom: 2rem;
+    /* Team on right */
+    .team-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 10px;
     }
+    .team-label::before { content:''; width:30px; height:2px; background:var(--yellow); }
     .team-card {
-      margin-bottom: 2rem;
-      border: 1px solid var(--rule);
+      background: var(--steel);
+      margin-bottom: 1.5rem;
       overflow: hidden;
-      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s;
     }
-    .team-card-top {
-      display: flex; gap: 0; align-items: stretch;
-    }
+    .team-card:hover { border-color: rgba(245,200,0,0.4); }
+    .team-top { display: flex; }
     .team-photo {
-      width: 130px; flex-shrink: 0;
-      object-fit: cover; object-position: top;
-      display: block;
+      width: 140px; flex-shrink: 0;
+      object-fit: cover; object-position: top center;
+      display: block; filter: grayscale(20%);
     }
-    .team-info {
-      padding: 1.3rem 1.3rem;
-      display: flex; flex-direction: column; justify-content: center;
+    .team-body {
+      padding: 1.4rem;
+      display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;
     }
     .team-name {
-      font-family: 'Merriweather', serif;
-      font-size: 1rem; font-weight: 700; color: var(--navy);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
     }
     .team-role {
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600; margin: 0.3rem 0 0.7rem;
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--yellow); font-weight: 500;
     }
-    .team-quote {
-      font-size: 0.83rem; color: var(--ink2); line-height: 1.7; font-style: italic;
-      border-top: 1px solid var(--rule); padding-top: 1rem; margin: 1rem 1.3rem 1.3rem;
+    .team-quote-text {
+      font-size: 0.82rem; color: var(--mist); line-height: 1.7;
+      font-style: italic; padding: 1.2rem 1.4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      position: relative;
     }
-    .team-quote::before { content: '" '; color: var(--gold); font-size: 1.2rem; }
+    .team-quote-text::before {
+      content: '"';
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem; color: var(--yellow);
+      opacity: 0.3; position: absolute;
+      top: 0.5rem; left: 1rem; line-height: 1;
+    }
 
-    /* ── SERVICES ── */
-    .services {
-      padding: 6rem 5vw;
-      background: var(--bg);
-    }
-    .services-header { margin-bottom: 3rem; }
+    /* ═══ SERVICES ═══ */
+    .services-section { background: var(--dark); padding: 6rem 5vw; }
+    .services-header { margin-bottom: 3.5rem; }
     .services-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 2px; background: rgba(255,255,255,0.04);
     }
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      padding: 2rem 1.8rem;
-      border-top: 3px solid var(--rule);
-      transition: border-top-color 0.25s, box-shadow 0.25s;
+    .svc-card {
+      background: var(--concrete);
+      padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+      cursor: default;
+      transition: background 0.25s;
     }
-    .service-card:hover {
-      border-top-color: var(--gold);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    .svc-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
     }
-    .svc-icon {
-      font-size: 2rem; margin-bottom: 1rem;
-      display: block;
+    .svc-card:hover { background: var(--steel); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3.5rem; font-weight: 700;
+      color: rgba(245,200,0,0.1);
+      line-height: 1; margin-bottom: 1rem;
+      user-select: none;
     }
-    .svc-title {
-      font-family: 'Merriweather', serif;
-      font-size: 1rem; font-weight: 700; color: var(--navy);
-      margin-bottom: 0.7rem; line-height: 1.3;
+    .svc-icon-wrap {
+      width: 48px; height: 48px;
+      border: 2px solid rgba(245,200,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
     }
-    .svc-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+    .svc-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--white); margin-bottom: 0.75rem; line-height: 1.2;
+    }
+    .svc-desc { font-size: 0.84rem; color: var(--mist); line-height: 1.75; font-weight: 300; }
 
-    /* ── GALLERY ── */
-    .gallery {
-      padding: 5rem 5vw;
-      background: var(--navy);
-    }
-    .gallery-eyebrow {
-      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold-lt); font-weight: 600; margin-bottom: 0.8rem;
-    }
-    .gallery h2 {
-      font-family: 'Merriweather', serif;
-      font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700;
-      color: #fff; margin-bottom: 2.5rem;
-    }
+    /* ═══ FIELD GALLERY ═══ */
+    .gallery-section { background: var(--concrete); padding: 6rem 5vw; }
+    .gallery-header { margin-bottom: 3rem; }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      grid-template-rows: 260px 260px;
+      gap: 4px;
     }
-    .gallery-img {
-      width: 100%; aspect-ratio: 1;
+    .g-cell { overflow: hidden; position: relative; }
+    .g-cell.wide { grid-column: span 2; }
+    .g-cell.tall { grid-row: span 2; }
+    .g-img {
+      width: 100%; height: 100%;
       object-fit: cover; display: block;
-      filter: brightness(0.92);
-      transition: filter 0.3s;
+      filter: grayscale(30%) brightness(0.85);
+      transition: filter 0.4s, transform 0.4s;
     }
-    .gallery-img:hover { filter: brightness(1); }
+    .g-cell:hover .g-img { filter: grayscale(0%) brightness(1); transform: scale(1.04); }
+    .g-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* CTA cell */
+    .g-cta-cell {
+      background: var(--yellow);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem; text-align: center; gap: 1rem;
+    }
+    .g-cta-cell h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem; font-weight: 700;
+      text-transform: uppercase; color: var(--dark); line-height: 1.2;
+    }
+    .g-cta-cell p { font-size: 0.82rem; color: rgba(0,0,0,0.65); }
+    .g-cta-btn {
+      background: var(--dark); color: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.65rem 1.4rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .g-cta-btn:hover { background: var(--concrete); }
 
-    /* ── CLIENTS ── */
-    .clients {
-      background: var(--white);
-      padding: 5rem 5vw;
-    }
+    /* ═══ CLIENTS ═══ */
+    .clients-section { background: var(--dark); padding: 5rem 5vw; }
     .clients-header { margin-bottom: 3rem; }
-    .clients-logos {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: var(--rule);
+    .clients-ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .client-logo-cell {
-      background: var(--white);
+    .clients-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border-left: 1px solid rgba(255,255,255,0.07);
+    }
+    .client-cell {
       padding: 2rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
     }
-    .client-logo-cell:hover { background: var(--gold-bg); }
-    .client-logo-cell img {
-      max-height: 48px; max-width: 130px;
-      object-fit: contain; filter: grayscale(100%) opacity(0.6);
+    .client-cell:hover { background: var(--steel); }
+    .client-cell img {
+      max-height: 46px; max-width: 130px;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(0.5) invert(1) opacity(0.5);
       transition: filter 0.3s;
     }
-    .client-logo-cell:hover img { filter: grayscale(0%) opacity(1); }
+    .client-cell:hover img {
+      filter: grayscale(0%) brightness(1) invert(0) opacity(1);
+    }
 
-    /* ── CTA BANNER ── */
-    .cta-banner {
-      background: var(--gold);
-      padding: 4rem 5vw;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 2rem; flex-wrap: wrap;
+    /* ═══ PROCESS / HOW WE WORK ═══ */
+    .process-section { background: var(--concrete); padding: 6rem 5vw; }
+    .process-header { margin-bottom: 3.5rem; }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      position: relative;
     }
-    .cta-banner-text h3 {
-      font-family: 'Merriweather', serif;
-      font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700;
-      color: #fff; margin-bottom: 0.5rem;
+    /* Connecting line */
+    .process-steps::before {
+      content: '';
+      position: absolute; top: 28px; left: 10%; right: 10%;
+      height: 2px; background: rgba(245,200,0,0.2);
+      z-index: 0;
     }
-    .cta-banner-text p { font-size: 0.95rem; color: rgba(255,255,255,0.85); font-weight: 300; }
-    .btn-white {
-      background: #fff; color: var(--gold);
-      padding: 0.9rem 2.2rem; font-size: 0.82rem;
-      font-weight: 700; text-decoration: none; letter-spacing: 0.06em;
-      border: 2px solid #fff; white-space: nowrap;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-white:hover { background: transparent; color: #fff; }
-
-    /* ── CONTACT ── */
-    .contact {
-      background: var(--bg);
-      padding: 6rem 5vw;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: start;
-    }
-    .contact-info { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 2rem; }
-    .cinfo-item { display: flex; gap: 1rem; align-items: flex-start; }
-    .cinfo-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-      background: var(--navy); color: #fff;
+    .process-step { text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+    .step-dot {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--steel); border: 2px solid var(--yellow);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; margin-top: 2px;
+      font-size: 1.3rem; margin: 0 auto 1.2rem;
+      transition: background 0.2s;
     }
-    .cinfo-label {
-      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gold); font-weight: 700; margin-bottom: 0.3rem;
+    .process-step:hover .step-dot { background: var(--yellow); }
+    .step-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.5rem;
     }
-    .cinfo-val { font-size: 0.9rem; color: var(--ink2); line-height: 1.6; }
-    .cinfo-val a { color: var(--ink2); text-decoration: none; }
-    .cinfo-val a:hover { color: var(--navy); text-decoration: underline; }
+    .step-desc { font-size: 0.78rem; color: var(--mist); line-height: 1.65; }
 
-    .contact-form {}
-    .form-group { margin-bottom: 1.1rem; }
-    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-group label {
-      display: block; font-size: 0.72rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--muted); font-weight: 600;
-      margin-bottom: 0.4rem;
+    /* ═══ CONTACT ═══ */
+    .contact-section { background: var(--dark); padding: 6rem 5vw; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+    .contact-left {}
+    .contact-info-blocks { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+    .cblock {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s;
     }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      background: var(--white); border: 1px solid var(--rule);
-      color: var(--ink); font-family: inherit; font-size: 0.9rem;
-      padding: 0.75rem 1rem; outline: none;
-      transition: border-color 0.2s;
+    .cblock:hover { background: var(--steel); }
+    .cblock-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--yellow); color: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .cblock-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 0.3rem;
+    }
+    .cblock-val { font-size: 0.88rem; color: var(--offwhite); line-height: 1.65; }
+    .cblock-val a { color: var(--offwhite); text-decoration: none; }
+    .cblock-val a:hover { color: var(--yellow); }
+
+    /* Form */
+    .contact-form {}
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .fgroup { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .fgroup label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--grey); font-weight: 500;
+    }
+    .fgroup input, .fgroup textarea, .fgroup select {
+      background: var(--steel);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      color: var(--white); font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.9rem; padding: 0.8rem 1rem;
+      outline: none; transition: border-color 0.2s;
       -webkit-appearance: none;
     }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus { border-color: var(--gold); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-submit-btn {
-      background: var(--navy); color: #fff;
-      border: 2px solid var(--navy);
-      padding: 0.9rem 2.5rem; font-family: inherit;
-      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em;
-      cursor: pointer; transition: background 0.2s, color 0.2s;
+    .fgroup input:focus, .fgroup textarea:focus {
+      border-bottom-color: var(--yellow);
+    }
+    .fgroup textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      background: var(--yellow); color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 1rem 2.5rem;
+      border: none; cursor: pointer; transition: background 0.2s;
       margin-top: 0.5rem;
     }
-    .form-submit-btn:hover { background: transparent; color: var(--navy); }
+    .form-submit:hover { background: var(--yellow2); }
 
-    /* ── FOOTER ── */
-    .footer-main {
-      background: var(--navy);
+    /* ═══ FOOTER ═══ */
+    .footer-top {
+      background: var(--dark);
+      border-top: 3px solid var(--yellow);
       padding: 3.5rem 5vw 2rem;
-      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
       gap: 3rem;
     }
-    .footer-brand img { height: 40px; margin-bottom: 1rem; filter: brightness(10); }
-    .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 300; margin-top: 0.8rem; }
+    .footer-logo-img { height: 38px; filter: brightness(10) saturate(0); margin-bottom: 0.8rem; }
+    .footer-brand-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--white);
+    }
+    .footer-tagline {
+      font-size: 0.82rem; color: var(--grey); line-height: 1.7;
+      font-weight: 300; margin-top: 0.8rem;
+    }
     .footer-col-title {
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold-lt); font-weight: 600; margin-bottom: 1.2rem;
-      padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
     .footer-links a {
-      font-size: 0.85rem; color: rgba(255,255,255,0.5);
-      text-decoration: none; transition: color 0.2s;
+      font-size: 0.84rem; color: var(--grey); text-decoration: none; transition: color 0.2s;
     }
-    .footer-links a:hover { color: #fff; }
-    .footer-contact-item { font-size: 0.83rem; color: rgba(255,255,255,0.5); margin-bottom: 0.7rem; line-height: 1.6; }
-    .footer-contact-item a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .footer-contact-item a:hover { color: #fff; }
+    .footer-links a:hover { color: var(--yellow); }
+    .footer-contact-line {
+      font-size: 0.82rem; color: var(--grey); margin-bottom: 0.6rem; line-height: 1.6;
+    }
+    .footer-contact-line a { color: var(--grey); text-decoration: none; }
+    .footer-contact-line a:hover { color: var(--yellow); }
     .footer-bottom {
-      background: #0f1c2d;
-      padding: 1.2rem 5vw;
-      display: flex; align-items: center; justify-content: space-between;
+      background: #0a0a0a;
+      padding: 1rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 0.5rem;
-      font-size: 0.75rem; color: rgba(255,255,255,0.35);
+      font-size: 0.72rem; color: #444;
     }
 
-    /* ── RESPONSIVE ── */
+    /* ═══ RESPONSIVE ═══ */
     @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-stats { display: none; }
-      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-main { grid-template-columns: 1fr; padding: 100px 5vw 40px; }
+      .hero-panel { display: none; }
+      .hero-bottom { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .services-grid { grid-template-columns: 1fr 1fr; }
-      .contact { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-main { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .clients-logos { grid-template-columns: repeat(2, 1fr); }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .g-cell.wide, .g-cell.tall { grid-column: span 1; grid-row: span 1; }
+      .g-cell { height: 220px; }
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .process-steps::before { display: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .topbar { display: none; }
     }
     @media (max-width: 600px) {
-      .topbar { display: none; }
-      .nav-links { display: none; }
       .services-grid { grid-template-columns: 1fr; }
-      .form-row-2 { grid-template-columns: 1fr; }
-      .footer-main { grid-template-columns: 1fr; }
-      .trust-bar { gap: 1.2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-bottom { grid-template-columns: 1fr 1fr; }
       .about-pillars { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .g-cell { height: 200px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -486,334 +634,391 @@
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-left">
-    <span>📍 Railnagar, Rajkot, Gujarat – 360001</span>
-    <span class="topbar-divider">|</span>
-    <span>Mon–Sat: 9:00 AM – 6:00 PM</span>
+    <span>📍 Railnagar, Rajkot – 360001, Gujarat, India</span>
+    <span class="topbar-sep">|</span>
+    <span>Mon – Sat &nbsp;·&nbsp; 9:00 AM – 6:00 PM</span>
   </div>
   <div class="topbar-right">
     <a href="tel:+919898158196">📞 +91-9898 158 196</a>
-    <span class="topbar-divider">|</span>
+    <span class="topbar-sep">|</span>
     <a href="mailto:info@krishnapriyatraders.com">✉ info@krishnapriyatraders.com</a>
   </div>
 </div>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/06/cropped-KPT_Logo_PNG-01-1-scaled-1-270x270.png" alt="KPT Logo"/>
-    <div class="nav-logo-text">
-      <div class="nav-logo-name">Krishna Priya Traders</div>
-      <div class="nav-logo-sub">Railway Contractors & Suppliers</div>
+  <div class="nav-brand">
+    <img class="nav-logo-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/06/cropped-KPT_Logo_PNG-01-1-scaled-1-270x270.png" alt="KPT Logo"/>
+    <div class="nav-brand-name">
+      Krishna Priya Traders
+      <span>Railway Signalling &amp; Telecom</span>
     </div>
   </div>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#about">About Us</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#clients">Clients</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get a Quote</a>
+  <a href="#contact" class="nav-quote">Get a Quote</a>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════ HERO ══════════ -->
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-badge">Est. 2007 · Rajkot, Gujarat</div>
-    <h1>
-      Empowering Railways with<br>
-      <em>Smart Signalling Solutions</em>
-    </h1>
-    <p class="hero-sub">
-      Krishna Priya Traders specialises in advanced signalling and telecommunication services for safer, more efficient railway operations. With 20+ years of experience, we deliver precision and reliability — from design to commissioning.
-    </p>
-    <div class="hero-actions">
-      <a href="#services" class="btn-gold">Explore Services</a>
-      <a href="#contact" class="btn-outline-w">Get a Quote</a>
+  <div class="hero-bg"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="hero-tag">Est. 2007 · Rajkot, Gujarat</div>
+      <h1>
+        <span class="line-outline">Railway</span>
+        <span class="line-yellow">Signalling</span>
+        That Works.
+      </h1>
+      <p class="hero-desc">20+ years on the ground — designing, installing, and maintaining railway signalling & telecom systems that keep India's trains moving safely.</p>
+      <div class="hero-ctas">
+        <a href="#services" class="btn-yellow">Our Services</a>
+        <a href="#contact" class="btn-ghost-y">Get a Quote</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-label">Live Field Stats</div>
+      <div class="panel-stat">
+        <div class="panel-num">20<em>+</em></div>
+        <div class="panel-desc">Years of field experience in Railway Signalling & Telecom</div>
+      </div>
+      <div class="panel-stat">
+        <div class="panel-num">100<em>+</em></div>
+        <div class="panel-desc">Skilled contractual field engineers deployed on projects</div>
+      </div>
+      <div class="panel-stat">
+        <div class="panel-num">8<em>+</em></div>
+        <div class="panel-desc">Major rail organisations trust us as their go-to contractor</div>
+      </div>
+      <div class="panel-stat">
+        <div class="panel-num">0</div>
+        <div class="panel-desc">Safety compromises — ever. On any site. Any project.</div>
+      </div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="hstat">
-      <div class="hstat-num">20<sup>+</sup></div>
-      <div class="hstat-label">Years of Experience</div>
+  <div class="hero-bottom">
+    <div class="hb-item"><div class="hb-icon">🔀</div><div class="hb-text"><strong>EI &amp; RRI Interlocking</strong>Design to commissioning</div></div>
+    <div class="hb-item"><div class="hb-icon">📡</div><div class="hb-text"><strong>Axle Counter &amp; Telecom</strong>Real-time detection systems</div></div>
+    <div class="hb-item"><div class="hb-icon">🔧</div><div class="hb-text"><strong>Preventive Maintenance</strong>Scheduled field inspections</div></div>
+    <div class="hb-item"><div class="hb-icon">⚡</div><div class="hb-text"><strong>Fault Rectification</strong>Rapid on-site repairs</div></div>
+  </div>
+</section>
+
+<!-- HAZARD DIVIDER -->
+<div class="section-divider"><div class="hazard"></div><div class="div-label">About Us</div></div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="eyebrow">Our Story</div>
+      <h2 class="field-title">Built on the<br><span>Tracks.</span></h2>
+      <p class="field-body">Founded in 2007, <strong>Krishna Priya Traders</strong> has grown from a ground-level contractor into one of Gujarat's most trusted names in Railway Signalling & Telecom. Every project we take on is backed by decades of field experience and a team that knows the work from the inside out.</p>
+      <p class="field-body">Our strength is our people — <strong>25–30 permanent engineers</strong> and over <strong>100 contractual field specialists</strong> who scale to any project size without compromising on quality, safety, or timeline.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-head">💡 Our Mission</div>
+          <p class="pillar-text">Deliver smart, high-quality railway systems that exceed client expectations while fostering a growth-oriented, safety-first work culture.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-head">🌍 Our Vision</div>
+          <p class="pillar-text">Lead in sustainable transport infrastructure through intelligent, cost-effective solutions — making railways safer and future-ready.</p>
+        </div>
+      </div>
     </div>
-    <div class="hstat">
-      <div class="hstat-num">100<sup>+</sup></div>
-      <div class="hstat-label">Field Engineers</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num">8<sup>+</sup></div>
-      <div class="hstat-label">Major Clients</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num">0</div>
-      <div class="hstat-label">Safety Compromises</div>
+
+    <div>
+      <div class="team-label">Meet the Team</div>
+
+      <div class="team-card">
+        <div class="team-top">
+          <img class="team-photo" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/DSC09271-Edited-1020x1020.png" alt="Chandra Kishor Singh"/>
+          <div class="team-body">
+            <div class="team-name">Chandra Kishor Singh</div>
+            <div class="team-role">Founder &amp; Owner</div>
+            <p class="field-body" style="font-size:0.82rem; margin:0; color:var(--grey);">Started KPT with a strong will and clear vision. Two decades of building trust, quality, and lasting client relationships.</p>
+          </div>
+        </div>
+        <div class="team-quote-text">
+          I remain dedicated to strengthening our people, adopting smarter practices, and embracing change — with the same passion that started it all.
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-top">
+          <img class="team-photo" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/PRANJAL_PATEL-1020x1020.jpg" alt="Pranjal Patel"/>
+          <div class="team-body">
+            <div class="team-name">Pranjal Patel</div>
+            <div class="team-role">Business Executive</div>
+            <p class="field-body" style="font-size:0.82rem; margin:0; color:var(--grey);">Drives innovation and client relationships. Focused on smarter delivery, process improvement, and long-term partnerships.</p>
+          </div>
+        </div>
+        <div class="team-quote-text">
+          What I'm most proud of is the trust our clients place in us — earned through commitment to detail, quality, and timely delivery every time.
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item">Timely Delivery</div>
-  <div class="trust-item">Zero Hassle Execution</div>
-  <div class="trust-item">Safety First Approach</div>
-  <div class="trust-item">Indian Railways Approved</div>
-  <div class="trust-item">End-to-End Solutions</div>
-</div>
+<!-- HAZARD DIVIDER -->
+<div class="section-divider"><div class="hazard"></div><div class="div-label">Services</div></div>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-left">
-    <div class="section-eyebrow">About Us</div>
-    <h2 class="section-title">Building Safer,<br>Smarter Railways Since 2007</h2>
-    <p class="body-text">
-      Founded in 2007, <strong>Krishna Priya Traders</strong> has emerged as a leading contractor in the Railway Signalling & Telecom domain. Backed by decades of hands-on experience, we bring precision, professionalism, and performance to the rail infrastructure sector.
-    </p>
-    <p class="body-text">
-      Our strength lies in our dedicated team of 25–30 permanent staff and over 100 skilled contractual employees who help us scale efficiently based on project needs. We combine modern technology with industry best practices to deliver end-to-end solutions.
-    </p>
-    <div class="about-pillars">
-      <div class="pillar">
-        <div class="pillar-icon">💡</div>
-        <div class="pillar-title">Our Mission</div>
-        <p class="pillar-text">Deliver smart, high-quality railway systems that exceed client expectations while fostering a growth-oriented work culture.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🌍</div>
-        <div class="pillar-title">Our Vision</div>
-        <p class="pillar-text">Lead in sustainable transport infrastructure through intelligent, cost-effective, and reliable solutions.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="about-right">
-    <div class="team-header">Meet Our Leadership</div>
-
-    <!-- Owner 1 -->
-    <div class="team-card">
-      <div class="team-card-top">
-        <img
-          class="team-photo"
-          src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/DSC09271-Edited-1020x1020.png"
-          alt="Chandra Kishor Singh"
-        />
-        <div class="team-info">
-          <div class="team-name">Chandra Kishor Singh</div>
-          <div class="team-role">Founder & Owner</div>
-          <p class="body-text" style="font-size:0.82rem; margin:0;">I started KPT with a strong will, a clear vision, and a commitment to hard work. Growth for me is a continuous journey — building values of honesty, quality, and long-term relationships.</p>
-        </div>
-      </div>
-      <p class="team-quote">
-        As we move forward, I remain dedicated to strengthening our people, adopting smarter practices, and embracing change — with the same passion that started it all.
-      </p>
-    </div>
-
-    <!-- Owner 2 -->
-    <div class="team-card">
-      <div class="team-card-top">
-        <img
-          class="team-photo"
-          src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/PRANJAL_PATEL-1020x1020.jpg"
-          alt="Pranjal Patel"
-        />
-        <div class="team-info">
-          <div class="team-name">Pranjal Patel</div>
-          <div class="team-role">Business Executive</div>
-          <p class="body-text" style="font-size:0.82rem; margin:0;">The success of KPT comes from hard work and the strong relationships we've built with customers and vendors. Innovation drives my approach to business at every step.</p>
-        </div>
-      </div>
-      <p class="team-quote">
-        What I'm most proud of is the trust we've earned from our clients — reflecting our commitment to detail, quality, and timely delivery.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
+<!-- ══════════ SERVICES ══════════ -->
+<section class="services-section" id="services">
   <div class="services-header">
-    <div class="section-eyebrow">What We Offer</div>
-    <h2 class="section-title">Our Services</h2>
-    <p class="body-text" style="max-width:560px;">End-to-end railway signalling and telecom solutions — designed, installed, tested, and maintained with uncompromising quality.</p>
+    <div class="eyebrow">What We Do</div>
+    <h2 class="field-title">Field-Proven <span>Services</span></h2>
+    <p class="field-body" style="max-width:540px;">Every service we offer has been tested, refined, and delivered on active railway lines. We don't just know the theory — we've done the work.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card">
-      <span class="svc-icon">🔀</span>
-      <div class="svc-title">EI & RRI Interlocking Works</div>
-      <p class="svc-desc">Electronic and Route Relay Interlocking systems designed, installed, and commissioned for safe, conflict-free train movements across junctions.</p>
+    <div class="svc-card">
+      <div class="svc-number">01</div>
+      <div class="svc-icon-wrap">🔀</div>
+      <div class="svc-name">EI &amp; RRI Interlocking Works</div>
+      <p class="svc-desc">Electronic and Route Relay Interlocking systems designed, installed, and commissioned for safe, conflict-free train movements across complex junctions.</p>
     </div>
-    <div class="service-card">
-      <span class="svc-icon">📡</span>
-      <div class="svc-title">Axle Counter & Telecom Solutions</div>
-      <p class="svc-desc">Reliable axle counter installations and telecom infrastructure ensuring real-time communication and precise train detection at every track section.</p>
+    <div class="svc-card">
+      <div class="svc-number">02</div>
+      <div class="svc-icon-wrap">📡</div>
+      <div class="svc-name">Axle Counter &amp; Telecom Solutions</div>
+      <p class="svc-desc">High-reliability axle counter installations and telecom infrastructure ensuring precise train detection and real-time communication at every track section.</p>
     </div>
-    <div class="service-card">
-      <span class="svc-icon">🔧</span>
-      <div class="svc-title">Preventive Maintenance</div>
-      <p class="svc-desc">Scheduled inspections, cleaning, lubrication, and component testing to keep signalling systems healthy and operational — preventing failures before they occur.</p>
+    <div class="svc-card">
+      <div class="svc-number">03</div>
+      <div class="svc-icon-wrap">🔧</div>
+      <div class="svc-name">Preventive Maintenance</div>
+      <p class="svc-desc">Scheduled field inspections, cleaning, lubrication, and component testing to keep signalling systems operating at peak health — before failures occur.</p>
     </div>
-    <div class="service-card">
-      <span class="svc-icon">⚡</span>
-      <div class="svc-title">Fault Rectification & Repairs</div>
-      <p class="svc-desc">Rapid identification and resolution of wiring faults, broken components, and calibration errors — minimising downtime and restoring operations swiftly.</p>
+    <div class="svc-card">
+      <div class="svc-number">04</div>
+      <div class="svc-icon-wrap">⚡</div>
+      <div class="svc-name">Fault Rectification &amp; Repairs</div>
+      <p class="svc-desc">Rapid on-site diagnosis and resolution of wiring faults, broken components, and calibration errors — minimising downtime and restoring operations fast.</p>
     </div>
-    <div class="service-card">
-      <span class="svc-icon">📐</span>
-      <div class="svc-title">Signalling System Design & Integration</div>
-      <p class="svc-desc">Complete design, integration, and testing of signalling systems aligned with Indian Railways standards, safety norms, and project specifications.</p>
+    <div class="svc-card">
+      <div class="svc-number">05</div>
+      <div class="svc-icon-wrap">📐</div>
+      <div class="svc-name">Signalling System Design</div>
+      <p class="svc-desc">Complete design, integration, and testing of signalling systems aligned with Indian Railways standards, safety codes, and project-specific requirements.</p>
     </div>
-    <div class="service-card">
-      <span class="svc-icon">✅</span>
-      <div class="svc-title">System Commissioning</div>
-      <p class="svc-desc">End-to-end commissioning support — from site surveys and system trials to final handover with zero safety compromises and full documentation.</p>
+    <div class="svc-card">
+      <div class="svc-number">06</div>
+      <div class="svc-icon-wrap">✅</div>
+      <div class="svc-name">System Commissioning</div>
+      <p class="svc-desc">End-to-end commissioning from site survey and system trials to final handover — with full documentation and zero safety compromises at every step.</p>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <div class="gallery-eyebrow">Our Work</div>
-  <h2>A Glimpse from the Field</h2>
+<!-- HAZARD DIVIDER -->
+<div class="section-divider"><div class="hazard"></div><div class="div-label">Gallery</div></div>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header">
+    <div class="eyebrow">From the Field</div>
+    <h2 class="field-title">Work in <span>Action</span></h2>
+  </div>
   <div class="gallery-grid">
-    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.56-PM-600x600.jpeg" alt="Field work 1"/>
-    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.50-PM-600x600.jpeg" alt="Field work 2"/>
-    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.57-PM-600x600.jpeg" alt="Field work 3"/>
-    <img class="gallery-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.57-PM-1-600x600.jpeg" alt="Field work 4"/>
+    <div class="g-cell wide">
+      <img class="g-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.56-PM-600x600.jpeg" alt="Field work 1"/>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-cell">
+      <img class="g-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.50-PM-600x600.jpeg" alt="Field work 2"/>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-cta-cell">
+      <h3>Timely Delivery. Zero Hassle.</h3>
+      <p>Every project. Every time. Guaranteed.</p>
+      <a href="#contact" class="g-cta-btn">Start a Project →</a>
+    </div>
+    <div class="g-cell">
+      <img class="g-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.57-PM-600x600.jpeg" alt="Field work 3"/>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-cell wide">
+      <img class="g-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.57-PM-1-600x600.jpeg" alt="Field work 4"/>
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-cell">
+      <img class="g-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-09-at-11.20.56-PM-600x600.jpeg" alt="Field work 5"/>
+      <div class="g-overlay"></div>
+    </div>
   </div>
 </section>
 
-<!-- CLIENTS -->
-<section class="clients" id="clients">
+<!-- HAZARD DIVIDER -->
+<div class="section-divider"><div class="hazard"></div><div class="div-label">Clients</div></div>
+
+<!-- ══════════ CLIENTS ══════════ -->
+<section class="clients-section" id="clients">
   <div class="clients-header">
-    <div class="section-eyebrow">Our Clients</div>
-    <h2 class="section-title">Trusted by India's Leading Railway Organisations</h2>
+    <div class="eyebrow">Who We Work With</div>
+    <h2 class="field-title">Trusted by India's <span>Rail Leaders</span></h2>
+    <p class="field-body" style="max-width:520px;">From national railway bodies to global engineering firms — these are the organisations that put their most critical infrastructure in our hands.</p>
   </div>
-  <div class="clients-logos">
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/Daco_3987834-1020x1020.png" alt="Indian Railways"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/275100RVNLlogo1.svg" alt="RVNL"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/HitachiRailSTS.svg" alt="Hitachi Rail STS"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/KEC-Logo-hi-res-jpg.jpg" alt="KEC"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/lt.webp" alt="L&T"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/L.2.1-1.png" alt="Client"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/dfc-logo.jpg" alt="DFC"/>
-    </div>
-    <div class="client-logo-cell">
-      <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/download.png" alt="Client"/>
+  <div class="clients-ticker-wrap">
+    <div class="clients-grid">
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/Daco_3987834-1020x1020.png" alt="Indian Railways"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/275100RVNLlogo1.svg" alt="RVNL"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/HitachiRailSTS.svg" alt="Hitachi Rail STS"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/KEC-Logo-hi-res-jpg.jpg" alt="KEC"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/lt.webp" alt="L&T"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/L.2.1-1.png" alt="Client"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/dfc-logo.jpg" alt="DFC"/></div>
+      <div class="client-cell"><img src="https://krishnapriyatraders.com/wp-content/uploads/2025/08/download.png" alt="Client"/></div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<div class="cta-banner">
-  <div class="cta-banner-text">
-    <h3>Have a Railway Project in Mind?</h3>
-    <p>We respond to all enquiries within 24 hours. Timely delivery. Zero hassle. Guaranteed.</p>
-  </div>
-  <a href="#contact" class="btn-white">Contact Us Today</a>
-</div>
+<!-- HAZARD DIVIDER -->
+<div class="section-divider"><div class="hazard"></div><div class="div-label">How We Work</div></div>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-left">
-    <div class="section-eyebrow">Contact Us</div>
-    <h2 class="section-title">Get in Touch<br>with Our Team</h2>
-    <p class="body-text">Fill out the form or reach us directly. We'll get back to you within 24 hours with the right solution for your project.</p>
-    <div class="contact-info">
-      <div class="cinfo-item">
-        <div class="cinfo-icon">📞</div>
-        <div>
-          <div class="cinfo-label">Phone</div>
-          <div class="cinfo-val">
-            <a href="tel:+919898158196">+91-9898 158 196</a><br>
-            <a href="tel:+917096386274">+91-7096 386 274</a>
+<!-- ══════════ PROCESS ══════════ -->
+<section class="process-section">
+  <div class="process-header">
+    <div class="eyebrow">Our Process</div>
+    <h2 class="field-title">From Brief to <span>Handover</span></h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-dot">📋</div>
+      <div class="step-title">Site Survey</div>
+      <p class="step-desc">Detailed assessment of the site, existing systems, and project scope before any work begins.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">📐</div>
+      <div class="step-title">Design</div>
+      <p class="step-desc">Engineering drawings and system design aligned with Indian Railways safety standards.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">🏗️</div>
+      <div class="step-title">Installation</div>
+      <p class="step-desc">Field deployment by our trained engineers — on schedule, on spec, no shortcuts.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">🧪</div>
+      <div class="step-title">Testing</div>
+      <p class="step-desc">Rigorous testing and integration trials before any system goes live on the network.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">✅</div>
+      <div class="step-title">Commissioning</div>
+      <p class="step-desc">Final handover with complete documentation, training, and post-delivery support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HAZARD DIVIDER -->
+<div class="section-divider"><div class="hazard"></div><div class="div-label">Contact</div></div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="eyebrow">Get in Touch</div>
+      <h2 class="field-title">Have a Project<br><span>On the Line?</span></h2>
+      <p class="field-body">Tell us what you need. Our team will get back to you within 24 hours with the right solution — no vague quotes, just straight answers.</p>
+      <div class="contact-info-blocks">
+        <div class="cblock">
+          <div class="cblock-icon">📞</div>
+          <div>
+            <div class="cblock-label">Phone</div>
+            <div class="cblock-val">
+              <a href="tel:+919898158196">+91-9898 158 196</a><br>
+              <a href="tel:+917096386274">+91-7096 386 274</a>
+            </div>
+          </div>
+        </div>
+        <div class="cblock">
+          <div class="cblock-icon">✉</div>
+          <div>
+            <div class="cblock-label">Email</div>
+            <div class="cblock-val"><a href="mailto:info@krishnapriyatraders.com">info@krishnapriyatraders.com</a></div>
+          </div>
+        </div>
+        <div class="cblock">
+          <div class="cblock-icon">📍</div>
+          <div>
+            <div class="cblock-label">Office</div>
+            <div class="cblock-val">B/H. Jay Ambe Apartment, Popatpara,<br>Plot No.33, Lord Krishna Park, St. No.2,<br>Railnagar, Rajkot – 360001, Gujarat</div>
+          </div>
+        </div>
+        <div class="cblock">
+          <div class="cblock-icon">🕐</div>
+          <div>
+            <div class="cblock-label">Hours</div>
+            <div class="cblock-val">Monday – Saturday: 9:00 AM – 6:00 PM IST</div>
           </div>
         </div>
       </div>
-      <div class="cinfo-item">
-        <div class="cinfo-icon">✉</div>
-        <div>
-          <div class="cinfo-label">Email</div>
-          <div class="cinfo-val"><a href="mailto:info@krishnapriyatraders.com">info@krishnapriyatraders.com</a></div>
-        </div>
-      </div>
-      <div class="cinfo-item">
-        <div class="cinfo-icon">📍</div>
-        <div>
-          <div class="cinfo-label">Office Address</div>
-          <div class="cinfo-val">B/H. Jay Ambe Apartment, Popatpara,<br>Plot No.33, Lord Krishna Park, St. No.2,<br>Railnagar, Rajkot – 360001, Gujarat, India</div>
-        </div>
-      </div>
-      <div class="cinfo-item">
-        <div class="cinfo-icon">🕐</div>
-        <div>
-          <div class="cinfo-label">Working Hours</div>
-          <div class="cinfo-val">Monday – Saturday: 9:00 AM – 6:00 PM IST</div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="contact-form">
-    <div class="section-eyebrow">Send a Message</div>
-    <br/>
-    <div class="form-row-2">
-      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
-      <div class="form-group"><label>Company / Organisation</label><input type="text" placeholder="Your company"/></div>
+
+    <div class="contact-form">
+      <div class="eyebrow">Send a Message</div>
+      <br/>
+      <div class="form-row">
+        <div class="fgroup"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
+        <div class="fgroup"><label>Company</label><input type="text" placeholder="Organisation name"/></div>
+      </div>
+      <div class="form-row">
+        <div class="fgroup"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+        <div class="fgroup"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+      </div>
+      <div class="fgroup"><label>Project / Service Required</label><input type="text" placeholder="e.g. EI Interlocking, Maintenance Contract, Axle Counter…"/></div>
+      <div class="fgroup"><label>Message</label><textarea placeholder="Describe your project — scope, location, timeline, and any specific requirements you have…"></textarea></div>
+      <button class="form-submit">Send Message →</button>
     </div>
-    <div class="form-row-2">
-      <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"/></div>
-      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
-    </div>
-    <div class="form-group"><label>Subject / Project Type</label><input type="text" placeholder="e.g. EI Interlocking, Maintenance Contract…"/></div>
-    <div class="form-group"><label>Message</label><textarea placeholder="Describe your project — scope, location, timeline, and any specific requirements…"></textarea></div>
-    <button class="form-submit-btn">Send Message →</button>
   </div>
 </section>
 
-<!-- FOOTER -->
-<div class="footer-main">
+<!-- HAZARD DIVIDER -->
+<div class="hazard-sm"></div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<div class="footer-top">
   <div>
-    <img src="https://krishnapriyatraders.com/wp-content/uploads/2025/06/White_Cropped.png" alt="KPT Logo"/>
-    <div style="font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:#fff;">Krishna Priya Traders</div>
-    <p class="footer-tagline">Railway Signalling & Telecom contractors delivering safe, reliable, and precision infrastructure since 2007.</p>
+    <img class="footer-logo-img" src="https://krishnapriyatraders.com/wp-content/uploads/2025/06/White_Cropped.png" alt="KPT Logo"/>
+    <div class="footer-brand-name">Krishna Priya Traders</div>
+    <p class="footer-tagline">Railway Signalling & Telecom contractors delivering field-proven, safety-first infrastructure since 2007. Based in Rajkot, Gujarat.</p>
   </div>
   <div>
-    <div class="footer-col-title">Quick Links</div>
+    <div class="footer-col-title">Navigation</div>
     <ul class="footer-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About Us</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#clients">Our Clients</a></li>
-      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
   <div>
-    <div class="footer-col-title">Our Services</div>
+    <div class="footer-col-title">Services</div>
     <ul class="footer-links">
-      <li><a href="#services">EI & RRI Interlocking</a></li>
+      <li><a href="#services">EI &amp; RRI Interlocking</a></li>
       <li><a href="#services">Axle Counter Solutions</a></li>
       <li><a href="#services">Telecom Infrastructure</a></li>
       <li><a href="#services">Preventive Maintenance</a></li>
       <li><a href="#services">Fault Rectification</a></li>
+      <li><a href="#services">System Commissioning</a></li>
     </ul>
   </div>
   <div>
     <div class="footer-col-title">Contact</div>
-    <div class="footer-contact-item">📍 Railnagar, Rajkot – 360001<br>Gujarat, India</div>
-    <div class="footer-contact-item">📞 <a href="tel:+919898158196">+91-9898 158 196</a></div>
-    <div class="footer-contact-item">✉ <a href="mailto:info@krishnapriyatraders.com">info@krishnapriyatraders.com</a></div>
+    <div class="footer-contact-line">📍 Railnagar, Rajkot – 360001<br>Gujarat, India</div>
+    <div class="footer-contact-line">📞 <a href="tel:+919898158196">+91-9898 158 196</a></div>
+    <div class="footer-contact-line">📞 <a href="tel:+917096386274">+91-7096 386 274</a></div>
+    <div class="footer-contact-line">✉ <a href="mailto:info@krishnapriyatraders.com">info@krishnapriyatraders.com</a></div>
   </div>
 </div>
 <div class="footer-bottom">
